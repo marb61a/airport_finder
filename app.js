@@ -1,4 +1,3 @@
-var express = require("express");
 var express = require('express');
 var express_geocoding_api = require('express-geocoding-api');
 var bodyParser = require('body-parser');
@@ -14,6 +13,24 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res){
 	res.send('Please use /api/airports or /api/states endpoints');
+});
+
+app.get('api/airports', function(req, res){
+    Airport.getAirports(function(err, docs){
+		if(err){
+			res.send(err);
+		}
+		res.json(docs);
+	});
+});
+
+app.get('/api/airports/state/:state', function(req, res) {
+    Airport.getAirportByState(req.params.state,function(err, docs){
+		if(err){
+			res.send(err);
+		}
+		res.json(docs);
+	});
 });
 
 //app.listen(3000);
