@@ -16,5 +16,6 @@ app.get('/', function(req, res){
 	res.send('Please use /api/airports or /api/states endpoints');
 });
 
-app.listen(3000, 'localhost');
+//app.listen(3000);
+app.listen(process.env.PORT, process.env.IP);
 console.log('App started on port 3000');
