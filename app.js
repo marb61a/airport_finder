@@ -4,6 +4,16 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 
+Airport = require('./models/airport.js');
+State = require('./models/state.js');
+
+app.use(express_geocoding_api({
+	geocoder:{
+		provider: 'google'
+	}
+}));
+
+
 //mongoose connect
 mongoose.connect('mongodb://localhost/airfind');
 var db = mongoose.connection;
@@ -11,7 +21,7 @@ var db = mongoose.connection;
 app.use(express.static(__dirname+'/client'));
 app.use(bodyParser.json());
 
-app.get('/', function(req, res){
+app.get('/api', function(req, res){
 	res.send('Please use /api/airports or /api/states endpoints');
 });
 
